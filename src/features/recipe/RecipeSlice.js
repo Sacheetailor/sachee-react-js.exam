@@ -3,32 +3,26 @@ import axios from 'axios';
 
 const API = 'http://localhost:3000/recipes';
 
-
-// GET DATA
 export const fetchRecipes = createAsyncThunk(
   'recipes/fetchRecipes',
   async () => {
 
     const response = await axios.get(API);
-    return response.data;
 
+    return response.data;
   }
 );
 
-
-// ADD DATA
 export const addRecipe = createAsyncThunk(
   'recipes/addRecipe',
   async (recipe) => {
 
     const response = await axios.post(API, recipe);
-    return response.data;
 
+    return response.data;
   }
 );
 
-
-// UPDATE DATA
 export const updateRecipe = createAsyncThunk(
   'recipes/updateRecipe',
   async (recipe) => {
@@ -39,22 +33,18 @@ export const updateRecipe = createAsyncThunk(
     );
 
     return response.data;
-
   }
 );
 
-
-// DELETE DATA
 export const deleteRecipe = createAsyncThunk(
   'recipes/deleteRecipe',
   async (id) => {
 
     await axios.delete(`${API}/${id}`);
-    return id;
 
+    return id;
   }
 );
-
 
 const recipeSlice = createSlice({
   name: 'recipes',
@@ -70,7 +60,6 @@ const recipeSlice = createSlice({
 
     builder
 
-      // FETCH
       .addCase(fetchRecipes.pending, (state) => {
         state.status = 'loading';
       })
@@ -80,23 +69,26 @@ const recipeSlice = createSlice({
         state.items = action.payload;
       })
 
-      // ADD
+      .addCase(fetchRecipes.rejected, (state) => {
+        state.status = 'failed';
+      })
+
       .addCase(addRecipe.fulfilled, (state, action) => {
         state.items.push(action.payload);
       })
 
-      // UPDATE
       .addCase(updateRecipe.fulfilled, (state, action) => {
 
         const index = state.items.findIndex(
           (item) => item.id === action.payload.id
         );
 
-        state.items[index] = action.payload;
+        if (index !== -1) {
+          state.items[index] = action.payload;
+        }
 
       })
 
-      // DELETE
       .addCase(deleteRecipe.fulfilled, (state, action) => {
 
         state.items = state.items.filter(

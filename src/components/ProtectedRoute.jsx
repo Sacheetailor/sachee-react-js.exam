@@ -1,10 +1,14 @@
 import React from 'react';
-import { navigate } from 'react-router-dom';
-import { useAuth} from '../context/AuthContext.jsx';
+import { Navigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+
 const ProtectedRoute = ({ children }) => {
-    const {isAuthenticated } = useAuth();
-    return isAuthenticated ? children : <navigate to="/login" replace />;
+
+    const currentUser = useSelector(
+        (state) => state.user.currentUser
+    );
+
+    return currentUser ? children : <Navigate to="/login" replace />;
 };
 
-
-export default pivateroute ;
+export default ProtectedRoute;

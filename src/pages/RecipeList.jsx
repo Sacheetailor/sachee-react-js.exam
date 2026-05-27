@@ -8,7 +8,9 @@ const RecipeList = () => {
 
   const dispatch = useDispatch();
 
-  const { items, status } = useSelector((state) => state.recipes);
+  const { items = [], status } = useSelector(
+    (state) => state.recipes
+  );
 
   const [search, setSearch] = useState('');
 
@@ -18,15 +20,17 @@ const RecipeList = () => {
       dispatch(fetchRecipes());
     }
 
-  }, [status]);
+  }, [status, dispatch]);
 
   if (status === 'loading') {
     return <Loader />;
   }
 
-  const filteredRecipes = items.filter((recipe) =>
-    recipe.name.toLowerCase().includes(search.toLowerCase())
-  );
+  const filteredRecipes = Array.isArray(items)
+    ? items.filter((recipe) =>
+        recipe.name.toLowerCase().includes(search.toLowerCase())
+      )
+    : [];
 
   return (
     <div className="container mt-4">

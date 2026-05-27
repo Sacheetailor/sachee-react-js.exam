@@ -2,6 +2,8 @@ import React from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { deleteRecipe } from '../features/recipe/RecipeSlice';
+import { useAuth } from '../context/AuthContext';
+
 
 const RecipeDetails = () => {
 

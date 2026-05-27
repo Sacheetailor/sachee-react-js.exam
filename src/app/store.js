@@ -1,6 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit';
 import recipeReducer from '../features/recipe/RecipeSlice';
-import useReducer  from '../features/user/UserSlice';
+import userReducer from '../features/user/UserSlice';
 
 export const store = configureStore({
     reducer: {
@@ -8,6 +8,3 @@ export const store = configureStore({
         user: userReducer
     }
 });
-
-
-
