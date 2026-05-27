@@ -1,4 +1,6 @@
 import React from 'react';
+import 'bootstrap/dist/css/bootstrap.min.css'
+import 'bootstrap/dist/js/bootstrap.bundle.js'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import NavigationBar from './components/Navbar';
 import RecipeList from './pages/RecipeList';
@@ -7,6 +9,7 @@ import RecipeForm from './pages/RecipeForm';
 import Login from './pages/Login';
 import ProtectedRoute from './components/ProtectedRoute';
 import { AuthProvider } from './context/AuthContext';
+
 
 function App() {
   return (

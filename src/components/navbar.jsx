@@ -1,65 +1,45 @@
-import {navbar, nav, container, button} from 'react-bootstrap';
-import {link, usenavigate }from 'react-routes-dom';
-import { useAuth }from '../context/AuthContext.js';
+import React from 'react';
+import { Navbar, Nav, Container, Button } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 
-const NavigationBar = () => {
-
+function NavigationBar() {
   return (
-    <Navbar bg="dark" variant="dark">
+    <Navbar bg="dark" variant="dark" expand="lg">
 
       <Container>
 
-        <Navbar.Brand>
-          RECIPE BOOK
+        {/* Logo */}
+        <Navbar.Brand as={Link} to="/">
+          Recipe Book
         </Navbar.Brand>
 
-        <Nav className="me-auto">
+        {/* Mobile Menu Button */}
+        <Navbar.Toggle />
 
-          <Nav.Link as={Link} to="/">
-            Home
-          </Nav.Link>
+        <Navbar.Collapse>
 
-          <Nav.Link as={Link} to="/add-recipe">
-            Add Recipe
-          </Nav.Link>
+          {/* Left Side Menu */}
+          <Nav className="me-auto">
+            <Nav.Link as={Link} to="/">
+              Home
+            </Nav.Link>
 
-          <Nav.Link as={Link} to="/login">
+            <Nav.Link as={Link} to="/add-recipe">
+              Add Recipe
+            </Nav.Link>
+          </Nav>
+
+          {/* Right Side Button */}
+          <Button variant="warning" as={Link} to="/login">
             Login
-          </Nav.Link>
+          </Button>
 
-        </Nav>
+        </Navbar.Collapse>
 
       </Container>
 
     </Navbar>
   );
-};
+}
 
 export default NavigationBar;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
